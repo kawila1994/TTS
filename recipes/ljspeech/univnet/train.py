@@ -39,6 +39,6 @@ model = GAN(config, ap)
 
 # init the trainer and 🚀
 trainer = Trainer(
-    TrainerArgs(), config, output_path, model=model, train_samples=train_samples, eval_samples=eval_samples
+    TrainerArgs(), config, config.output_path, model=model, train_samples=train_samples, eval_samples=eval_samples
 )
 trainer.fit()
