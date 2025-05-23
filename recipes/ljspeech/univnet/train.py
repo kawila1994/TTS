@@ -7,10 +7,9 @@ from TTS.vocoder.configs import UnivnetConfig
 from TTS.vocoder.datasets.preprocess import load_wav_data
 from TTS.vocoder.models.gan import GAN
 
-output_path = os.path.dirname(os.path.abspath(__file__))
 config = UnivnetConfig(
-    batch_size=64,
-    eval_batch_size=16,
+    batch_size=32,
+    eval_batch_size=8,
     num_loader_workers=4,
     num_eval_loader_workers=4,
     run_eval=True,
@@ -25,8 +24,8 @@ config = UnivnetConfig(
     mixed_precision=False,
     lr_gen=1e-4,
     lr_disc=1e-4,
-    data_path=os.path.join(output_path, "../LJSpeech-1.1/wavs/"),
-    output_path=output_path,
+    data_path="/data/clips",
+    output_path = "/models"
 )
 
 # init audio processor

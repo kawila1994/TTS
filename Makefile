@@ -84,7 +84,8 @@ docker-build:  ## build the Docker image for Thai TTS training
 	docker compose build
 
 train:  ## train Thai TTS using config.json from ./ai_model_data
-	docker compose run --rm tts tts --config_path /data/config.json --output_path /models/
+    docker compose run --rm --entrypoint="" tts \
+        python3 recipes/ljspeech/univnet/train.py
 
 serve:  ## start inference API server on port 5002
 	docker compose run --rm -p 5002:5002 tts tts-server \
