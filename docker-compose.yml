@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  tts:
+    build: .
+    container_name: tts
+    volumes:
+      - ./models:/models
+      - ./ai_model_data:/data
+    ports:
+      - "5002:5002"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true

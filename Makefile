@@ -76,3 +76,24 @@ install:	## install 🐸 TTS for development.
 
 docs:	## build the docs
 	$(MAKE) -C docs clean && $(MAKE) -C docs html
+
+# ─────────────────────────────────────────────────────────────
+# 🐳 Docker-Specific Commands (new for training Thai)
+# ─────────────────────────────────────────────────────────────
+docker-build:  ## build the Docker image for Thai TTS training
+	docker compose build
+
+train:  ## train Thai TTS using config.json from ./ai_model_data
+	docker compose run --rm tts tts --config_path /data/config.json --output_path /models/
+
+serve:  ## start inference API server on port 5002
+	docker compose run --rm -p 5002:5002 tts tts-server \
+		--model_path /models/best_model.pth \
+		--config_path /models/config.json \
+		--use_cuda true
+
+shell:  ## open a bash shell inside the container
+	docker compose run --rm tts bash
+
+stop:  ## stop and remove containers
+	docker compose down
