@@ -8,6 +8,7 @@ from TTS.vocoder.datasets.preprocess import load_wav_data
 from TTS.vocoder.models.gan import GAN
 
 config = UnivnetConfig(
+    target_loss=0.01,
     batch_size=12,
     eval_batch_size=2,
     num_loader_workers=4,
