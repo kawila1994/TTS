@@ -1,15 +1,14 @@
 import os
 
 from trainer import Trainer, TrainerArgs
-
 from TTS.utils.audio import AudioProcessor
 from TTS.vocoder.configs import UnivnetConfig
 from TTS.vocoder.datasets.preprocess import load_wav_data
 from TTS.vocoder.models.gan import GAN
 
 config = UnivnetConfig(
-    target_loss=0.01,
-    batch_size=12,
+    target_loss="loss_1",
+    batch_size=16,
     eval_batch_size=2,
     num_loader_workers=4,
     num_eval_loader_workers=4,
@@ -33,6 +32,7 @@ config = UnivnetConfig(
 ap = AudioProcessor(**config.audio.to_dict())
 
 # load training samples
+print("🔍 Using data_path:", config.data_path)
 eval_samples, train_samples = load_wav_data(config.data_path, config.eval_split_size)
 
 # init model
